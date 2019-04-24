@@ -3,6 +3,4 @@ export {
 } from './auth'
 
 
-export {
-    findQuestionsStart, findQuestions, findQuestionsFail, findQuestionsSuccess
-} from './questions'
+export * from './questions'

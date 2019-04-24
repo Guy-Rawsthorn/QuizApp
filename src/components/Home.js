@@ -21,28 +21,19 @@ class Home extends React.Component {
 
     state = {
         value: "",
-        questions: [
-            {q:"What is the capital city of Ukraine?",a:"Kiev", m: false},
-            {q:"2+1",a:"3", m:false},
-            {q:"3+1",a:"4", m:false}]
     };
 
     onInputChange(event) {
         this.props.questions.map((question, i) => {
             let a = question.answer.toLowerCase();
             if (a === event.target.value.toLowerCase()) {
-                console.log("answer is correct",a);
-
+                console.log("answer is correct",question._id);
+                this.props.updateQuestion(question._id)
             }
         });
         this.setState({ value: event.target.value });
 
     }
-
-    renderTableRow(){
-
-    }
-
 
     render() {
         const rowData = this.props.questions.map((questions, i) => {
@@ -92,7 +83,8 @@ const mapReduxStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        findQuestions: () => dispatch(actions.findQuestions())
+        findQuestions: () => dispatch(actions.findQuestions()),
+        updateQuestion: (questionId) => dispatch(actions.updateQuestion(questionId))
     }
 };
 

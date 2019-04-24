@@ -10,6 +10,7 @@ export function* findQuestionsSaga(action){
             query: `
                 query questions{
                     questions {
+                        _id
                         question
                         answer
                         isCorrect
@@ -32,5 +33,48 @@ export function* findQuestionsSaga(action){
         yield put(actions.findQuestionsFail(err));
     }
 }
+
+export function* updateQuestionSaga(action){
+    console.log("update question saga");
+    yield put(actions.updateQuestionStart());
+    const questionId = action.questionId;
+    console.log(questionId);
+    try {
+        let requestBody = {
+            query: `
+                mutation updateQuestion($questionId: ID!, $isCorrect: Boolean!) {
+                    updateQuestion(updateQuestionInput: {
+                        questionId: $questionId
+                        isCorrect: $isCorrect
+                        }) {
+                        _id
+                        question
+                        answer
+                        isCorrect
+                    }
+                }
+            `,
+            variables: {
+                questionId: questionId,
+                isCorrect: true
+            }
+        };
+        const response = yield axios.post('/', JSON.stringify(requestBody));
+        console.log("response",response);
+        if (response.data.errors) {
+            console.log("errors")
+            yield put(actions.updateQuestionFail(response.data.errors[0].message));
+            throw Error(response.data.errors[0].message);
+        }
+        if (response.status === 200 && response.status !== 201) {
+            console.log("hello");
+            yield put(actions.updateQuestionSuccess(response.data.data))
+        }
+    } catch (err) {
+        console.log(err);
+        yield put(actions.updateQuestionFail(err));
+    }
+}
+
 
 

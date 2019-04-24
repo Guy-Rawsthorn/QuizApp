@@ -21,8 +21,34 @@ export const findQuestionsFail = (error) => {
 };
 
 export const findQuestions = () => {
-    console.log("1");
     return {
         type: actionTypes.FIND_QUESTIONS
+    }
+};
+
+export const updateQuestion = (questionId) => {
+    return {
+        questionId: questionId,
+        type: actionTypes.UPDATE_QUESTIONS
+    }
+};
+
+export const updateQuestionSuccess = (questions) => {
+    return {
+        type: actionTypes.UPDATE_QUESTIONS_SUCCESS,
+        questions: questions
+    }
+};
+
+export const updateQuestionStart = () => {
+    return {
+        type: actionTypes.UPDATE_QUESTIONS_START
+    }
+};
+
+export const updateQuestionFail = (error) => {
+    return {
+        type: actionTypes.UPDATE_QUESTIONS_FAIL,
+        error: error
     }
 };

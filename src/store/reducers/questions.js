@@ -31,6 +31,28 @@ const findQuestionsFail = (state, action) => {
     })
 };
 
+const updateQuestionsStart = (state, action) => {
+    return updateObject(state, {
+        error: false,
+        loading: true
+    });
+};
+const updateQuestionsSuccess = (state, action) => {
+    console.log("update Question Success reducers", action);
+    return updateObject(state, {
+        error: false,
+        questions: action.questions.questions,
+        loading: true
+    });
+};
+const updateQuestionsFail = (state, action) => {
+    return updateObject(state, {
+        error: action.error,
+        loading: false,
+        saved: true
+    });
+};
+
 const reducer = (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.FIND_QUESTIONS_FAIL:

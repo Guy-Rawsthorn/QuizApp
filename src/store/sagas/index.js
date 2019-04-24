@@ -1,6 +1,6 @@
 import {takeEvery, takeLatest, all} from 'redux-saga/effects';
 import {authUserSaga, logoutSaga, authCheckStateSaga} from "./auth";
-import {findQuestionsSaga} from "./questions"
+import {findQuestionsSaga, updateQuestionSaga} from "./questions"
 import * as actionTypes from '../actions/actionTypes';
 
 export function* watchAuth() {
@@ -15,4 +15,5 @@ export function* watchAuth() {
 
 export function* watchQuestions() {
     yield takeLatest(actionTypes.FIND_QUESTIONS, findQuestionsSaga);
+    yield takeLatest(actionTypes.UPDATE_QUESTIONS, updateQuestionSaga)
 }

@@ -8,9 +8,9 @@ module.exports = {
         try {
             const questions = await Questions.find();
             return questions.map(questions => {
-                console.log(questions);
                 return {
                     ...questions._doc,
+                    _id : questions._doc._id.toString()
                 };
             });
         } catch (err) {
@@ -28,7 +28,7 @@ module.exports = {
         const result = await createdQuestion.save();
         return {
             ...result._doc,
-            _id: result.id,
+            _id: result._doc._id.toString(),
         };
     } catch (err) {
         throw err;
@@ -36,16 +36,26 @@ module.exports = {
     },
     updateQuestion: async (args) => {
         try {
-            // Find order and reassign bartender
+            // Find question and change isCorrect
             const foundQuestion = await Questions.findById(args.updateQuestionInput.questionId);
             if (args.updateQuestionInput.isCorrect === true){
-                foundQuestion.isCorrect = args.updateQuestionInput.isCorrect
+                if (foundQuestion.isCorrect === false) {
+                    foundQuestion.isCorrect = args.updateQuestionInput.isCorrect
+                }
             }
             await foundQuestion.save();
-            return foundQuestion
+            return {
+                _id: foundQuestion._id.toString(),
+                question: foundQuestion.question,
+                answer: foundQuestion.answer,
+                isCorrect: foundQuestion.isCorrect
+            }
         } catch (err) {
             throw err;
         }
+    },
+    deleteAllQuestions:  async (parent, args) => {
+        await Questions.find().remove();
     },
     users: async () => {
         try {

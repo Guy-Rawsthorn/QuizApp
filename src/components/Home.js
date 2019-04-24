@@ -28,10 +28,11 @@ class Home extends React.Component {
     };
 
     onInputChange(event) {
-        this.state.questions.map((answer, i) => {
-            let a = answer.a.toLowerCase();
+        this.props.questions.map((question, i) => {
+            let a = question.answer.toLowerCase();
             if (a === event.target.value.toLowerCase()) {
                 console.log("answer is correct",a);
+
             }
         });
         this.setState({ value: event.target.value });
@@ -45,7 +46,6 @@ class Home extends React.Component {
 
     render() {
         const rowData = this.props.questions.map((questions, i) => {
-            console.log(this.props.questions[i].isCorrect);
                 return (
                     <tr key={i}>
                         <td>{questions.question}</td>

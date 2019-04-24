@@ -10,9 +10,13 @@ import * as serviceWorker from './serviceWorker';
 import configureStore from './store/configureStore';
 import createSagaMiddleware from 'redux-saga';
 import { Provider } from 'react-redux';
+import {watchQuestions} from './store/sagas/index';
 
 const sagaMiddleware = createSagaMiddleware();
+
 const store = configureStore(sagaMiddleware);
+
+sagaMiddleware.run(watchQuestions);
 
 
 const routing = (
@@ -32,9 +36,9 @@ const routing = (
             <Switch>
                 <Provider store={store}>
                     <Route exact path="/" component={App} />
-                    <Route path="/users/" component={Auth} />
-                    <Route path="/home" component={Home} />
-                    <Route component={NotFound} />
+                    <Route exact path="/users/" component={Auth} />
+                    <Route exact path="/home" component={Home} />
+                    {/*<Route component={NotFound} />*/}
                 </Provider>
             </Switch>
         </div>

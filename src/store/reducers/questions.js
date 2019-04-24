@@ -16,7 +16,7 @@ const findQuestionsStart = (state, action) => {
 
 const findQuestionsSuccess = (state, action) => {
     return updateObject(state, {
-        questions: action.questions,
+        questions: action.questions.questions,
         error: false,
         loading: false,
         saved: true

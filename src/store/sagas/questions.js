@@ -3,6 +3,7 @@ import axios from '../../axios-instance';
 import * as actions from '../actions/index';
 
 export function* findQuestionsSaga(action){
+    console.log("find questions saga");
     yield put(actions.findQuestionsStart());
     try {
         let requestBody = {
@@ -23,6 +24,7 @@ export function* findQuestionsSaga(action){
             throw Error(response.data.errors[0].message);
         }
         if (response.status === 200 && response.status !== 201) {
+            console.log("hello");
             yield put(actions.findQuestionsSuccess(response.data.data))
         }
     } catch (err) {

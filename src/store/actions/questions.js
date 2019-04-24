@@ -20,9 +20,9 @@ export const findQuestionsFail = (error) => {
     };
 };
 
-export const findQuestions = (componentId) => {
+export const findQuestions = () => {
+    console.log("1");
     return {
-        type: actionTypes.FIND_QUESTIONS,
-        componentId: componentId,
+        type: actionTypes.FIND_QUESTIONS
     }
 };

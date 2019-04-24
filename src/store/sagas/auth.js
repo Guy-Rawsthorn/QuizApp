@@ -1,9 +1,8 @@
 import {put, call} from 'redux-saga/effects';
 import LocalStorage from 'react';
 import axios from '../../axios-instance';
-import {Alert} from 'react-native';
+import {Alert} from 'react';
 import * as actions from '../actions/index';
-import {Platform} from "react-native";
 
 export function* logoutSaga(action) {
     // call function makes generators more testable

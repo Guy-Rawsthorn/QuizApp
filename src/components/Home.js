@@ -10,7 +10,6 @@ class Home extends React.Component {
     }
 
     componentDidMount() {
-        console.log("yeye");
         this.props.findQuestions();
     }
 
@@ -23,7 +22,7 @@ class Home extends React.Component {
     state = {
         value: "",
         questions: [
-            {q:"What is the capital city of Ukrain?",a:"Kiev", m: false},
+            {q:"What is the capital city of Ukraine?",a:"Kiev", m: false},
             {q:"2+1",a:"3", m:false},
             {q:"3+1",a:"4", m:false}]
     };
@@ -39,22 +38,25 @@ class Home extends React.Component {
 
     }
 
+    renderTableRow(){
+
+    }
+
+
     render() {
-        let quiz = this.state.questions.map((questions, i) => {
-            return(
-            <tr key={i}>
-                <td>{questions.q}</td>
-                <td> {this.state.questions.m === true ? questions.a : null}</td>
-            </tr>
-            )
-        }
+        const rowData = this.props.questions.map((questions, i) => {
+            console.log(this.props.questions[i].isCorrect);
+                return (
+                    <tr key={i}>
+                        <td>{questions.question}</td>
+                        <td> {this.props.questions[i].isCorrect === true ? questions.answer : null}</td>
+                    </tr>
+                )
+            }
         );
 
         return (
             <div>
-
-                <div className="col-lg-1">
-                </div>
 
                 <div className="col-lg-10">
                     <h1>Quiz</h1>
@@ -73,12 +75,11 @@ class Home extends React.Component {
                         </tr>
                         </thead>
                             <tbody>
-                                {quiz}
+                            { this.props.questions !== null ? rowData : null }
                             </tbody>
                     </table>
-                    </div>
-                <div className="col-lg-1">
                 </div>
+
             </div>
     )
     }

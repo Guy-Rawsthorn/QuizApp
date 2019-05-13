@@ -6,6 +6,18 @@ export const authStart = () => {
     };
 };
 
+export const auth = (email, password, name, componentId, isSignUp, ) => {
+    console.log("auth");
+    return {
+        type: actionTypes.AUTH_USER,
+        email: email,
+        password: password,
+        name: name,
+        componentId: componentId,
+        isSignUp: isSignUp
+    };
+};
+
 export const authSuccess = (token, userId, tokenExpiration, name) => {
     return {
         type: actionTypes.AUTH_SUCCESS,
@@ -46,18 +58,6 @@ export const checkAuthRole = role => {
     return {
         type: actionTypes.AUTH_ROLE,
         role: role
-    };
-};
-
-
-export const auth = (email, password, name, componentId, isSignUp, ) => {
-    return {
-        type: actionTypes.AUTH_USER,
-        email: email,
-        password: password,
-        name: name,
-        componentId: componentId,
-        isSignUp: isSignUp
     };
 };
 

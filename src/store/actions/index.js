@@ -1,6 +1,6 @@
-export {
-    auth, logout, setAuthRedirectPath, authCheckState, logoutSucceed, authStart, authSuccess, authFail, checkAuthTimeout, checkAuthRole
-} from './auth'
+export
+    *
+from './auth'
 
 
 export * from './questions'

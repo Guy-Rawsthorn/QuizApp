@@ -21,14 +21,19 @@ class Home extends React.Component {
 
     state = {
         value: "",
+        refresh: false
+    };
+
+    handleCorrect = (question) => {
+        console.log("answer is correct",question._id);
+        this.props.updateQuestion(question._id);
     };
 
     onInputChange(event) {
         this.props.questions.map((question, i) => {
             let a = question.answer.toLowerCase();
             if (a === event.target.value.toLowerCase()) {
-                console.log("answer is correct",question._id);
-                this.props.updateQuestion(question._id)
+                this.handleCorrect(question,i);
             }
         });
         this.setState({ value: event.target.value });
@@ -40,7 +45,7 @@ class Home extends React.Component {
                 return (
                     <tr key={i}>
                         <td>{questions.question}</td>
-                        <td> {this.props.questions[i].isCorrect === true ? questions.answer : null}</td>
+                        <td> {questions.isCorrect === true ? questions.answer : null}</td>
                     </tr>
                 )
             }

@@ -5,26 +5,25 @@ import { Route, Link, BrowserRouter as Router, Switch } from 'react-router-dom'
 import App from './App';
 import Home from './components/Home';
 import Auth from './components/Auth';
-import NotFound from './components/NotFound';
 import * as serviceWorker from './serviceWorker';
 import configureStore from './store/configureStore';
 import createSagaMiddleware from 'redux-saga';
 import { Provider } from 'react-redux';
-import {watchQuestions} from './store/sagas/index';
+import {watchQuestions, watchAuth} from './store/sagas/index';
 
 const sagaMiddleware = createSagaMiddleware();
 
 const store = configureStore(sagaMiddleware);
 
 sagaMiddleware.run(watchQuestions);
-
+sagaMiddleware.run(watchAuth);
 
 const routing = (
     <Router>
         <div>
             <ul>
                 <li>
-                    <Link to="/">Home</Link>
+                    <Link to="/">React</Link>
                 </li>
                 <li>
                     <Link to="/users">Users</Link>
@@ -33,6 +32,7 @@ const routing = (
                     <Link to="/home">home</Link>
                 </li>
             </ul>
+
             <Switch>
                 <Provider store={store}>
                     <Route exact path="/" component={App} />

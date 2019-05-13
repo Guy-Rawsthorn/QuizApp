@@ -1,5 +1,6 @@
 import * as actionTypes from '../actions/actionTypes';
 import {updateObject} from "../utility";
+import {updateQuestion} from "../helper";
 
 const initialState = {
     loading: null,
@@ -38,10 +39,10 @@ const updateQuestionsStart = (state, action) => {
     });
 };
 const updateQuestionsSuccess = (state, action) => {
-    console.log("update Question Success reducers", action);
+    console.log("success", state, action)
     return updateObject(state, {
         error: false,
-        questions: action.questions.questions,
+        questions: updateQuestion(state.questions, action.questions.updateQuestion),
         loading: true
     });
 };
@@ -61,6 +62,12 @@ const reducer = (state = initialState, action) => {
             return findQuestionsStart(state, action);
         case actionTypes.FIND_QUESTIONS_SUCCESS:
             return findQuestionsSuccess(state, action);
+        case actionTypes.UPDATE_QUESTIONS_START:
+            return updateQuestionsStart(state, action);
+        case actionTypes.UPDATE_QUESTIONS_SUCCESS:
+            return updateQuestionsSuccess(state, action);
+        case actionTypes.UPDATE_QUESTIONS_FAIL:
+            return updateQuestionsFail(state, action);
             default: return state;
     }
 };

@@ -1,12 +1,16 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
+This project has been copied over from GitLab therfore commits are not shown :(
 ## Available Scripts
 
-In the project directory, you can run:
+With node version > 6 pull the rep and install node dependancies within ./my-app/ && ./my-app/backend
+### `npm install`
 
+Start the Express server in ./my-app/backend repo using:
 ### `npm start`
 
-Runs the app in the development mode.<br>
+Run the app using in ./my-app/
+### `npm start`
+
+<br>
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 The page will reload if you make edits.<br>
